@@ -5,6 +5,3 @@ data class MyData(
     val next: String,
     val total: Int
 )
-{
-
-}

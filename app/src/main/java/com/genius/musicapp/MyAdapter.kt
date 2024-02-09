@@ -1,6 +1,8 @@
 package com.genius.musicapp
 
 import android.app.Activity
+import android.app.Application
+import android.content.Context
 import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
@@ -14,12 +16,11 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
-class MyAdapter(val  context: Activity, val  dataList: List<Data>)
+class MyAdapter(val  context: Context , val  dataList: List<Data>)
     : RecyclerView.Adapter<MyAdapter.MyViewHolder>(){
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-val itemView = LayoutInflater.from(context).inflate(R.layout.each_item, parent, false)
+        val itemView = LayoutInflater.from(context).inflate(R.layout.each_item, parent, false)
 
         return MyViewHolder(itemView);
     }
@@ -32,12 +33,11 @@ val itemView = LayoutInflater.from(context).inflate(R.layout.each_item, parent, 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentData = dataList[position]
-
-        val mediaPlayer = MediaPlayer.create(context, currentData.explicit_content_lyrics)
-
         holder.title.text = currentData.title
 
         Picasso.get().load(currentData.album.cover).into(holder.image);
+
+        val mediaPlayer = MediaPlayer.create(context, currentData.preview.toUri())
 
         holder.play.setOnClickListener {
             mediaPlayer.start()
@@ -50,7 +50,7 @@ val itemView = LayoutInflater.from(context).inflate(R.layout.each_item, parent, 
     class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         val image : ImageView
         val title : TextView
-        val  play:ImageButton
+        val  play:  ImageButton
         val  pause: ImageButton
         init
         {
@@ -60,8 +60,5 @@ val itemView = LayoutInflater.from(context).inflate(R.layout.each_item, parent, 
             pause = itemView.findViewById(R.id.btnPause)
         }
     }
-
-
-
 
 }
