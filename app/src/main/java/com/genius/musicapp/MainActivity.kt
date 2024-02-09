@@ -8,6 +8,7 @@ import android.widget.EditText
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -33,7 +34,7 @@ class MainActivity : ComponentActivity() {
             override fun afterTextChanged(p0: Editable?) {
 
                 if (p0.toString()==""){
-
+                   return
                 }
                 filter(p0.toString())
 
@@ -44,7 +45,7 @@ class MainActivity : ComponentActivity() {
             }
         })
 
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.IO) {
 
             getMusic("Eminem")
         }
@@ -53,7 +54,7 @@ class MainActivity : ComponentActivity() {
 
     fun filter(text: String) {
 
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.IO) {
 
             getMusic(text)
         }
