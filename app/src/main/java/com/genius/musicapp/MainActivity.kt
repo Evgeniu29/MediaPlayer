@@ -21,6 +21,7 @@ class MainActivity : ComponentActivity() {
     lateinit var  myRecyclerView:RecyclerView
     lateinit var myAdapter: MyAdapter
     lateinit   var editText :EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,20 +48,16 @@ class MainActivity : ComponentActivity() {
 
         GlobalScope.launch(Dispatchers.IO) {
 
-            getMusic("Eminem")
+            getMusic("Rasmus")
         }
 
     }
 
     fun filter(text: String) {
-
         GlobalScope.launch(Dispatchers.IO) {
 
             getMusic(text)
         }
-
-
-
     }
 
     private fun getMusic(text:String){
@@ -82,17 +79,12 @@ class MainActivity : ComponentActivity() {
                 myRecyclerView.adapter = myAdapter
                 myRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity )
                 Log.d("Tag: onResponse ", "onResponse: " + response.body())
-
-
             }
 
             override fun onFailure(call: Call<MyData?>, t: Throwable) {
-
                 TODO("Not yet implemented")
                 Log.d("Tag: onFailure", "onFailure" + t.message)
             }
-
-
         })
 
     }

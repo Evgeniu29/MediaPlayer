@@ -52,12 +52,14 @@ class MyAdapter(val  context: Context , val  dataList: List<Data>)
         val title : TextView
         val  play:  ImageButton
         val  pause: ImageButton
+
         init
         {
             image = itemView.findViewById(R.id.musicImage)
             title = itemView.findViewById(R.id.musicTitle)
             play  = itemView.findViewById(R.id.btnPlay)
             pause = itemView.findViewById(R.id.btnPause)
+
         }
     }
 
