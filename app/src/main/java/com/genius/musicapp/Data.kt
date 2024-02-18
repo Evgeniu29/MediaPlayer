@@ -1,19 +1,28 @@
 package com.genius.musicapp
 
+import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "songTable")
 data class Data(
     val album: Album,
     val artist: Artist,
     val duration: Int,
-    val explicit_content_cover: Int,
+    @ColumnInfo(name = "Cover")
+    val explicit_content_cover: Int?,
     val explicit_content_lyrics: Int,
     val explicit_lyrics: Boolean,
+    @PrimaryKey(autoGenerate = true)
     val id: Long,
     val link: String,
     val md5_image: String,
     val preview: String,
     val rank: Int,
     val readable: Boolean,
-    val title: String,
+    @ColumnInfo(name = "Title")
+    val title: String?,
     val title_short: String,
     val title_version: String,
     val type: String

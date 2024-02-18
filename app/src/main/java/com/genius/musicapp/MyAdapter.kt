@@ -13,7 +13,12 @@ import android.widget.ImageView
 import android.widget.MediaController
 import android.widget.TextView
 import androidx.core.net.toUri
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.genius.musicapp.db.DataDatabase
+import com.genius.musicapp.model.DataViewModel
+import com.genius.musicapp.model.DataViewModelProviderFactory
+import com.genius.musicapp.repository.DataRepository
 import com.squareup.picasso.Picasso
 
 class MyAdapter(val  context: Context , val  dataList: List<Data>)
@@ -45,13 +50,18 @@ class MyAdapter(val  context: Context , val  dataList: List<Data>)
         holder.pause.setOnClickListener {
             mediaPlayer.stop()
         }
+
+        holder.like.setOnClickListener {
+
+        }
     }
 
     class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         val image : ImageView
         val title : TextView
-        val  play:  ImageButton
-        val  pause: ImageButton
+        val play:  ImageButton
+        val pause: ImageButton
+        val like : ImageButton
 
         init
         {
@@ -59,6 +69,7 @@ class MyAdapter(val  context: Context , val  dataList: List<Data>)
             title = itemView.findViewById(R.id.musicTitle)
             play  = itemView.findViewById(R.id.btnPlay)
             pause = itemView.findViewById(R.id.btnPause)
+            like =  itemView.findViewById(R.id.favourite)
 
         }
     }

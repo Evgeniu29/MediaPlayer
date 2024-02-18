@@ -6,8 +6,13 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
 import androidx.activity.ComponentActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.genius.musicapp.db.DataDatabase
+import com.genius.musicapp.model.DataViewModel
+import com.genius.musicapp.model.DataViewModelProviderFactory
+import com.genius.musicapp.repository.DataRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -21,6 +26,7 @@ class MainActivity : ComponentActivity() {
     lateinit var  myRecyclerView:RecyclerView
     lateinit var myAdapter: MyAdapter
     lateinit   var editText :EditText
+    lateinit var viewModel: DataViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +36,10 @@ class MainActivity : ComponentActivity() {
         myRecyclerView = findViewById(R.id.recyclerView)
 
         editText  = findViewById(R.id.se)
+
+
+
+
 
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
@@ -46,10 +56,13 @@ class MainActivity : ComponentActivity() {
             }
         })
 
+
+
         GlobalScope.launch(Dispatchers.IO) {
 
             getMusic("Rasmus")
         }
+
 
     }
 
@@ -57,6 +70,7 @@ class MainActivity : ComponentActivity() {
         GlobalScope.launch(Dispatchers.IO) {
 
             getMusic(text)
+
         }
     }
 
@@ -75,10 +89,12 @@ class MainActivity : ComponentActivity() {
 
                 val dataList = response.body()?.data!!
 
-                myAdapter = MyAdapter(this@MainActivity, dataList )
+                myAdapter = MyAdapter(this@MainActivity, dataList)
                 myRecyclerView.adapter = myAdapter
                 myRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity )
                 Log.d("Tag: onResponse ", "onResponse: " + response.body())
+
+
             }
 
             override fun onFailure(call: Call<MyData?>, t: Throwable) {
@@ -88,4 +104,11 @@ class MainActivity : ComponentActivity() {
         })
 
     }
-}
+
+
+
+
+
+
+    }
+
