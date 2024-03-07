@@ -1,11 +1,12 @@
-package com.genius.musicapp
+package com.genius.musicapp.data
 
-import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.genius.musicapp.Album
+import com.genius.musicapp.Artist
 
-@Entity(tableName = "songTable")
+@Entity(tableName = "favourite")
 data class Data(
     val album: Album,
     val artist: Artist,
@@ -14,8 +15,8 @@ data class Data(
     val explicit_content_cover: Int?,
     val explicit_content_lyrics: Int,
     val explicit_lyrics: Boolean,
-    @PrimaryKey(autoGenerate = true)
-    val id: Long,
+    @PrimaryKey
+    val id: Long?,
     val link: String,
     val md5_image: String,
     val preview: String,

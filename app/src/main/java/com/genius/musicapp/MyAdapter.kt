@@ -1,28 +1,24 @@
 package com.genius.musicapp
 
-import android.app.Activity
-import android.app.Application
 import android.content.Context
 import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.MediaController
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.genius.musicapp.db.DataDatabase
-import com.genius.musicapp.model.DataViewModel
-import com.genius.musicapp.model.DataViewModelProviderFactory
-import com.genius.musicapp.repository.DataRepository
+import com.codingwithjks.musicplayer.ViewModel.DataViewModel
+import com.genius.musicapp.data.Data
 import com.squareup.picasso.Picasso
 
-class MyAdapter(val  context: Context , val  dataList: List<Data>)
+class MyAdapter(val context: Context, var dataList: List<Data>)
     : RecyclerView.Adapter<MyAdapter.MyViewHolder>(){
+
+    private lateinit var dataViewModel: DataViewModel
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.each_item, parent, false)
@@ -74,4 +70,16 @@ class MyAdapter(val  context: Context , val  dataList: List<Data>)
         }
     }
 
-}
+    fun setData(dataList: ArrayList<Data>)
+    {
+        this.dataList=dataList
+
+        notifyDataSetChanged()
+    }
+
+
+
+
+    }
+
+

@@ -1,20 +1,37 @@
 package com.genius.musicapp.repository
 
-import com.genius.musicapp.Data
-import com.genius.musicapp.db.DataDatabase
+import android.content.Context
+import androidx.lifecycle.LiveData
+import com.example.inventory.data.DataDatabase
+import com.genius.musicapp.data.Data
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
+class DataRepository {
 
+    companion object {
+        private var dataDatabase: DataDatabase? = null
 
-class DataRepository(private val db : DataDatabase) {
+        private fun initDB(context: Context): DataDatabase? = DataDatabase.getInstance(context)
 
-    //val db = SongDatabase(application)
+        fun insert(context: Context, dataList: ArrayList<Data>) {
+            dataDatabase = initDB(context)
 
-    suspend fun insertData(data: Data){
-        db.getAllDataDao().upsert(data)
+            GlobalScope.launch(Dispatchers.IO) {
+
+                dataDatabase?.getDataDao()?.insert(dataList)
+            }
+
+        }
+
+        fun getAllData(context: Context): LiveData<List<Data>>?
+        {
+            this.dataDatabase = initDB(context = context)
+            return dataDatabase?.getDataDao()?.getAllData()
+        }
+
     }
-    suspend fun deleteData(data: Data) {
-        db.getAllDataDao().delete(data)
-    }
-    fun getSaveData() = db.getAllDataDao().getAllData()
+
 
 }
