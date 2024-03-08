@@ -26,15 +26,10 @@ class MainActivity : ComponentActivity() {
     lateinit var editText: EditText
     lateinit var dataViewModel: DataViewModel
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.main_activity)
-
-        dataViewModel=ViewModelProvider(this).get(DataViewModel::class.java)
-
 
 
         myRecyclerView = findViewById(R.id.recyclerView)
@@ -59,10 +54,6 @@ class MainActivity : ComponentActivity() {
             }
         })
 
-        GlobalScope.launch(Dispatchers.IO) {
-
-            initViewModel()
-        }
 
     }
     fun filter(text: String) {
@@ -88,13 +79,15 @@ class MainActivity : ComponentActivity() {
 
                 val dataList = response.body()?.data!!
 
+                dataViewModel=ViewModelProvider(this@MainActivity).get(DataViewModel::class.java)
+
+
                 dataViewModel.insert(this@MainActivity, ArrayList(dataList));
 
                 myAdapter = MyAdapter(this@MainActivity, dataList)
                 myRecyclerView.adapter = myAdapter
                 myRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
                 Log.d("Tag: onResponse ", "onResponse: " + response.body())
-
 
             }
 

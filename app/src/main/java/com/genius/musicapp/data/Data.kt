@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.genius.musicapp.Album
 import com.genius.musicapp.Artist
 
-@Entity(tableName = "favourite")
+@Entity(tableName = "music")
 data class Data(
     val album: Album,
     val artist: Artist,
@@ -15,7 +15,7 @@ data class Data(
     val explicit_content_cover: Int?,
     val explicit_content_lyrics: Int,
     val explicit_lyrics: Boolean,
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Long?,
     val link: String,
     val md5_image: String,
@@ -27,4 +27,4 @@ data class Data(
     val title_short: String,
     val title_version: String,
     val type: String
-)
+): java.io.Serializable

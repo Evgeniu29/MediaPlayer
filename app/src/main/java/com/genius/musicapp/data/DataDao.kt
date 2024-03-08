@@ -34,8 +34,7 @@ interface DataDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(dataList:ArrayList<Data>)
 
-    @Query("SELECT * FROM data ORDER BY id ASC")
+    @Query("SELECT * FROM music ORDER BY id ASC")
     fun getAllData(): LiveData<List<Data>>
-
 
 }

@@ -31,7 +31,7 @@ abstract class DataDatabase : RoomDatabase() {
     abstract fun getDataDao():DataDao
 
     companion object{
-        private const val DATABASE_NAME="favourite"
+        private const val DATABASE_NAME="music"
         @Volatile
         private var instance:DataDatabase?=null
 
