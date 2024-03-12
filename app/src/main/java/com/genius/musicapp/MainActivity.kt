@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codingwithjks.musicplayer.ViewModel.DataViewModel
 import com.genius.musicapp.data.Data
+import com.genius.musicapp.repository.DataRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -30,7 +31,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.main_activity)
-
 
         myRecyclerView = findViewById(R.id.recyclerView)
 
@@ -79,8 +79,7 @@ class MainActivity : ComponentActivity() {
 
                 val dataList = response.body()?.data!!
 
-                dataViewModel=ViewModelProvider(this@MainActivity).get(DataViewModel::class.java)
-
+                dataViewModel = ViewModelProvider(this@MainActivity).get(DataViewModel::class.java)
 
                 dataViewModel.insert(this@MainActivity, ArrayList(dataList));
 

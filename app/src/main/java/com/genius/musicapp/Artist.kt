@@ -1,5 +1,7 @@
 package com.genius.musicapp
 
+import androidx.room.ColumnInfo
+
 data class Artist(
     val id: Int,
     val link: String,

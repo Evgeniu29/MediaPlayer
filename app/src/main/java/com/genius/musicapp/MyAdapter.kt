@@ -36,7 +36,7 @@ class MyAdapter(val context: Context, var dataList: List<Data>)
         val currentData = dataList[position]
         holder.title.text = currentData.title
 
-        Picasso.get().load(currentData.album.cover).into(holder.image);
+        Picasso.get().load(currentData.album.cover_medium).into(holder.image);
 
         val mediaPlayer = MediaPlayer.create(context, currentData.preview.toUri())
 
